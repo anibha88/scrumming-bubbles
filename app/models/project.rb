@@ -1,6 +1,8 @@
 class Project < ActiveRecord::Base
   belongs_to :tenant
   validates_uniqueness_of :title
+  has_many :user_projects
+  has_many :users, through: :user_projects
   # validate :free_plan_can_only_have_one_project
 
   # def free_plan_can_only_have_one_project
@@ -19,9 +21,13 @@ class Project < ActiveRecord::Base
   #   end
   # end
 
-  def self.by_tenant(tenant_id)
+  def self.by_user_and_tenant(tenant_id, user)
     tenant = Tenant.find(tenant_id)
-    tenant.projects
+    if user.is_admin?
+      tenant.projects
+    else
+      user.projects.where(tenant_id: tenant_id)
+    end
   end
   
 end
