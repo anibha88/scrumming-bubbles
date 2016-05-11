@@ -4,9 +4,10 @@ class Tenant < ActiveRecord::Base
   has_many :members, dependent: :destroy
   has_many :projects, dependent: :destroy
 
-  # def can_create_projects?
+  def can_create_projects? user
   #   (plan == "free" && projects.count < 1) || (plan == 'premium')
-  # end
+    user.is_admin?
+  end
 
   validates_uniqueness_of :name
   validates_presence_of :name
