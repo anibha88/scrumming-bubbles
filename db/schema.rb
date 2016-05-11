@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160508192813) do
+ActiveRecord::Schema.define(version: 20160511185416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,7 +54,6 @@ ActiveRecord::Schema.define(version: 20160508192813) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "plan"
   end
 
   add_index "tenants", ["name"], name: "index_tenants_on_name", using: :btree
@@ -66,6 +65,16 @@ ActiveRecord::Schema.define(version: 20160508192813) do
   end
 
   add_index "tenants_users", ["tenant_id", "user_id"], name: "index_tenants_users_on_tenant_id_and_user_id", using: :btree
+
+  create_table "user_projects", force: :cascade do |t|
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "user_projects", ["project_id"], name: "index_user_projects_on_project_id", using: :btree
+  add_index "user_projects", ["user_id"], name: "index_user_projects_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                        default: "",    null: false
@@ -86,6 +95,7 @@ ActiveRecord::Schema.define(version: 20160508192813) do
     t.integer  "tenant_id"
     t.datetime "created_at",                                   null: false
     t.datetime "updated_at",                                   null: false
+    t.boolean  "is_admin",                     default: false
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
@@ -96,4 +106,6 @@ ActiveRecord::Schema.define(version: 20160508192813) do
   add_foreign_key "members", "users"
   add_foreign_key "projects", "tenants"
   add_foreign_key "tenants", "tenants"
+  add_foreign_key "user_projects", "projects"
+  add_foreign_key "user_projects", "users"
 end

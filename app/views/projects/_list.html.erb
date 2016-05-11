@@ -41,8 +41,7 @@
         <td>
             <%= link_to t('.edit', :default => t("helpers.links.edit")),
             edit_tenant_project_path(project, tenant_id: @tenant.id), :class => 'btn btn-default btn-xs' %>
-              <%#= link_to 'Edit Users', users_tenant_project_path(project, tenant_id: @tenant.id),
-              :class => 'btn btn-default btn-xs' %>
+              <%= link_to 'Edit Users', users_tenant_project_path(project, tenant_id: @tenant.id), :class => 'btn btn-default btn-xs' %>
               <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
               tenant_project_path(project, tenant_id: @tenant.id),
               :method => :delete,
@@ -64,6 +63,5 @@
 <% end %>
 
 
-<% if (@tenant.can_create_projects?) %>
-  <%= link_to 'New Project', new_tenant_project_path(tenant_id: @tenant.id), :class => 'btn btn-primary' %>
-<% end %>
+
+<%= link_to 'New Project', new_tenant_project_path(tenant_id: @tenant.id), :class => 'btn btn-primary' %>
