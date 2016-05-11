@@ -18,5 +18,10 @@ class Project < ActiveRecord::Base
   #     tenant.projects.order(:id).limit(1)
   #   end
   # end
+
+  def self.by_tenant(tenant_id)
+    tenant = Tenant.find(tenant_id)
+    tenant.projects
+  end
   
 end
