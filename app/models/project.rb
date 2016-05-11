@@ -26,7 +26,7 @@ class Project < ActiveRecord::Base
     if user.is_admin?
       tenant.projects
     else
-      user.projects.where(tenant_id: tenant_id)
+      user.projects.where(tenant_id: tenant.id)
     end
   end
   
