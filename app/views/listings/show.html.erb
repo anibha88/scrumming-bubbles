@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Q1:</strong>
+  <%= @listing.q1 %>
+</p>
+
+<p>
+  <strong>Q2:</strong>
+  <%= @listing.q2 %>
+</p>
+
+<p>
+  <strong>Q3:</strong>
+  <%= @listing.q3 %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @listing.user %>
+</p>
+
+<p>
+  <strong>Project:</strong>
+  <%= @listing.project %>
+</p>
+
+<%= link_to 'Edit', edit_listing_path(@listing) %> |
+<%= link_to 'Back', listings_path %>

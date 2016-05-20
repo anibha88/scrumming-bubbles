@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
 
+  #resources :listings
   resources :user_projects
   resources :tenants do
     resources :projects do
       get 'users', on: :member
       put 'add_user', on: :member
+      resources :listings
     end
   end
   
