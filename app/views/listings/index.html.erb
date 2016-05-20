@@ -1,35 +1,69 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Listing -%>
 
-<h1>Listing Listings</h1>
+<div class="page-header">
 
-<table>
-  <thead>
-    <tr>
-      <th>Q1</th>
-      <th>Q2</th>
-      <th>Q3</th>
-      <th>User</th>
-      <th>Project</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <h1>Listing all status</h1>
 
-  <tbody>
-    <% @listings.each do |listing| %>
+</div>
+
+
+
+  <table class="table table-striped">
+
+    <thead>
+
       <tr>
-        <td><%= listing.q1 %></td>
-        <td><%= listing.q2 %></td>
-        <td><%= listing.q3 %></td>
-        <td><%= listing.user %></td>
-        <td><%= listing.project %></td>
-        <td><%= link_to 'Show', listing %></td>
-        <td><%= link_to 'Edit', edit_listing_path(listing) %></td>
-        <td><%= link_to 'Destroy', listing, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+        <th>What did you work on yesterday?</th>
+
+        <th>What are you going to work on today?</th>
+
+        <th>What are you blocked on?</th>
+
+        <th>User email</th>
+
+        <th>Project Name</th>
+
+        <th>Created at</th>
+
+        <th>Updated at</th>
+
+        <th>Actions</th>
+
       </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<br>
+    </thead>
 
-<%= link_to 'New Listing', new_listing_path %>
+    <tbody>
+
+      <% @listings.each do |listing| %>
+<%#  binding.pry %>
+      <tr>
+
+        <td><%= link_to listing.q1, listing, class: 'main-link' %></td>
+
+        <td><%= link_to listing.q2, listing, class: 'main-link' %></td>
+
+        <td><%= link_to listing.q3, listing, class: 'main-link' %></td>
+
+        <td><%= listing.user.email %></td>
+
+        <td><%= link_to listing.project.title, tenant_project_path(listing.project_id, listing.project.tenant_id), class: 'main-link' %></td>
+
+        <td><%= listing.created_at.strftime("%d %b. %Y %H:%M") %></td>
+
+        <td><%= listing.updated_at.strftime("%d %b. %Y %H:%M") %></td>
+
+        <td>
+              <%= link_to 'Edit', edit_listing_path(listing,tenant_id: listing.project.tenant_id, project_id: listing.project.id) %></button>
+              <%= link_to 'Destroy', listing, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-xs btn-danger' %>
+        </td>
+
+      </tr>
+
+      <% end %>
+
+    </tbody>
+
+  </table>
+

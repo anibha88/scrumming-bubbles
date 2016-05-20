@@ -1,6 +1,5 @@
-<h1>Editing Listing</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @listing %> |
-<%= link_to 'Back', listings_path %>
+<%- model_class = Listing -%>
+<div class="page-header">
+  <h1>Update Status</h1>
+</div>
+<%= render :partial => 'form' %>
