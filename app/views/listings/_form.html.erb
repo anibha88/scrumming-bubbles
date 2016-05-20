@@ -1,37 +1,51 @@
 <%= form_for(@listing) do |f| %>
   <% if @listing.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@listing.errors.count, "error") %> prohibited this listing from being saved:</h2>
-
-      <ul>
-      <% @listing.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@listing.errors.count, "error") %> prohibited this listing from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @listing.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :q1 %><br>
-    <%= f.text_field :q1 %>
+  <div class="control-group">
+    <%= f.label :q1, 'What did you work on yesterday?', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :q1, :class => 'form-control' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :q2 %><br>
-    <%= f.text_field :q2 %>
+  <br />
+
+  <div class="control-group">
+    <%= f.label :q2, 'What are you going to work on today?', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :q2, :class => 'form-control' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :q3 %><br>
-    <%= f.text_field :q3 %>
+  <br />
+
+  <div class="control-group">
+    <%= f.label :q3, 'What are you blocked on?', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :q3, :class => 'form-control' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %>
-  </div>
-  <div class="field">
-    <%= f.label :project_id %><br>
-    <%= f.text_field :project_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <br />
+
+  <br />
+    <%= f.hidden_field :user_id, value: params[:tenant_id], :class => 'form-control' %>
+
+    <%= f.hidden_field :project_id, value: params[:project_id], :class => 'form-control' %>
+  
+  
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+  
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                root_path, :class => 'btn btn-default' %>
 <% end %>

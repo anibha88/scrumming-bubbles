@@ -1,29 +1,42 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Q1:</strong>
-  <%= @listing.q1 %>
-</p>
-
-<p>
-  <strong>Q2:</strong>
-  <%= @listing.q2 %>
-</p>
-
-<p>
-  <strong>Q3:</strong>
-  <%= @listing.q3 %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @listing.user %>
-</p>
-
-<p>
-  <strong>Project:</strong>
-  <%= @listing.project %>
-</p>
-
-<%= link_to 'Edit', edit_listing_path(@listing) %> |
-<%= link_to 'Back', listings_path %>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-12 lead">Status summary for project <%= @listing.project.title %><hr></div>
+          </div>
+          <div class="row">
+      <div class="col-md-4 text-center">
+              <img class="img-circle avatar avatar-original" style="-webkit-user-select:none; 
+              display:block; margin:auto;" src="http://robohash.org/sitsequiquia.png?size=120x120">
+            </div>
+            <div class="col-md-8">
+              <div class="row">
+                <div class="col-md-12">
+                  <h1 class="only-bottom-margin">Hey <%= @listing.user.email %></h1>
+                  <p> Below is your status update. </p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <span class="text-muted"><strong>What did you work on yesterday? :</strong></span> <br/> <%= @listing.q1 %><br>
+                  <span class="text-muted"><strong>What are you going to work on today? :</strong></span><br /> <%= @listing.q2 %><br>
+                  <span class="text-muted"><strong>What are you blocked on? :</strong></span> <br /> <%= @listing.q3 %><br><br>
+                  <small class="text-muted">Created: <%= @listing.created_at.strftime("%d %b. %Y %H:%M") %></small><br>
+                  <small class="text-muted">Updated: <%= @listing.updated_at.strftime("%d %b. %Y %H:%M") %></small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <hr><button class="btn btn-default pull-right"><i class="glyphicon glyphicon-pencil"></i><%= link_to 'Click Here To Edit', edit_listing_path(@listing,tenant_id: @listing.project.tenant_id, project_id: @listing.project.id) %></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
