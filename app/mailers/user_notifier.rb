@@ -5,4 +5,8 @@ class UserNotifier < ApplicationMailer
     @user = user
     mail(to: @user.email, subject: 'Sample Email')
   end
+
+  def status_email
+    mail(to: 'nithin@cognitiveclouds.com', subject: 'Sample Status Email')
+  end
 end
