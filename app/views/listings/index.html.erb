@@ -1,0 +1,69 @@
+<%- model_class = Listing -%>
+
+<div class="page-header">
+
+  <h1>Listing all status</h1>
+
+</div>
+
+
+
+  <table class="table table-striped">
+
+    <thead>
+
+      <tr>
+
+        <th>What did you work on yesterday?</th>
+
+        <th>What are you going to work on today?</th>
+
+        <th>What are you blocked on?</th>
+
+        <th>User email</th>
+
+        <th>Project Name</th>
+
+        <th>Created at</th>
+
+        <th>Updated at</th>
+
+        <th>Actions</th>
+
+      </tr>
+
+    </thead>
+
+    <tbody>
+
+      <% @listings.each do |listing| %>
+<%#  binding.pry %>
+      <tr>
+
+        <td><%= link_to listing.q1, listing, class: 'main-link' %></td>
+
+        <td><%= link_to listing.q2, listing, class: 'main-link' %></td>
+
+        <td><%= link_to listing.q3, listing, class: 'main-link' %></td>
+
+        <td><%= listing.user.email %></td>
+
+        <td><%= link_to listing.project.title, tenant_project_path(listing.project_id, listing.project.tenant_id), class: 'main-link' %></td>
+
+        <td><%= listing.created_at.strftime("%d %b. %Y %H:%M") %></td>
+
+        <td><%= listing.updated_at.strftime("%d %b. %Y %H:%M") %></td>
+
+        <td>
+              <%= link_to 'Edit', edit_listing_path(listing,tenant_id: listing.project.tenant_id, project_id: listing.project.id) %></button>
+              <%= link_to 'Destroy', listing, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-xs btn-danger' %>
+        </td>
+
+      </tr>
+
+      <% end %>
+
+    </tbody>
+
+  </table>
+
