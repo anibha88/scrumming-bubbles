@@ -5,8 +5,9 @@
   </head>
   <body>
     <h1>Hi <%= @user.email %></h1>
+    
     <p>
-      Sample mail sent using smtp.
+      A listing has been created by you.  <%= link_to 'For more details check',listing_path(@listing.id) %>
     </p>
   </body>
 </html>
