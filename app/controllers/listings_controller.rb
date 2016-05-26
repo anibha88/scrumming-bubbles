@@ -30,7 +30,7 @@ class ListingsController < ApplicationController
     respond_to do |format|
       if @listing.save
 
-        UserNotifier.sample_email(@user).deliver
+        UserNotifier.sample_email(@user, @listing).deliver
 
         format.html { redirect_to @listing, notice: 'Listing was successfully created.' }
         format.json { render :show, status: :created, location: @listing }
