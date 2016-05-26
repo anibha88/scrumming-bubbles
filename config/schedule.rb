@@ -20,5 +20,5 @@
 # Learn more: http://github.com/javan/whenever
 
 every 15.minutes do 
-  runner "Listing.send_status_email"
+  runner "Listing.send_status_email", :environment => 'development', :output => 'log/cron.log' 
 end
