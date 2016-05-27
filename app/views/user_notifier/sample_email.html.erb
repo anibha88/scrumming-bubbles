@@ -7,7 +7,7 @@
     <h1>Hi <%= @user.email %></h1>
     
     <p>
-      A listing has been created by you.  <%= link_to 'For more details check',listing_path(@listing.id) %>
+      A listing has been created by you.  <%= link_to 'For more details check',listing_url(@listing.id) %>
     </p>
   </body>
 </html>
