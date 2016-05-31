@@ -8,48 +8,60 @@
     <p>
       Sample status mail sent using smtp.
     </p>
-      <%= form_for [@tenant, @project], url: {controller: "listings", action: "send_email"}, :html => { :class => "form-horizontal project" } do |f| %>
-              <% if @project.errors.any? %>
-                <div id="error_expl" class="panel panel-danger">
-                  <div class="panel-heading">
-                    <h3 class="panel-title"><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h3>
-                  </div>
-                  <div class="panel-body">
-                    <ul>
-                    <% @project.errors.full_messages.each do |msg| %>
-                      <li><%= msg %></li>
-                    <% end %>
-                    </ul>
-                  </div>
-                </div>
-              <% end %>
+    <%#= render :partial => 'listings/form', locals: {user_id: @user.id, project_id: @project.id} %>
+<!--     start -->
+      <%= form_for(@listing) do |f| %>
+  <% if @listing.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@listing.errors.count, "error") %> prohibited this listing from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @listing.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
 
-              <div class="control-group">
-                <%= f.label :title, :class => 'control-label' %>
-                <div class="controls">
-                  <%= f.text_field :title, :class => 'form-control' %>
-                </div>
-              </div>
-              <div class="control-group">
-                <%= f.label :details, :class => 'control-label' %>
-                <div class="controls">
-                  <%= f.text_field :details, :class => 'form-control' %>
-                </div>
-              </div>
-              <div class="control-group">
-                <%= f.label :expected_completion_date, :class => 'control-label' %>
-                <div class="controls">
-                  <%= f.text_field :expected_completion_date, :class => 'form-control datepicker' %>
-                </div>
-              </div>
+  <div class="control-group">
+    <%= f.label :q1, 'What did you work on yesterday?', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :q1, :class => 'form-control' %>
+    </div>
+  </div>
+  <br />
 
-              <br />
-                  <%= f.hidden_field :tenant_id, value: @tenant.id, :class => 'form-control' %>
-                  <%= f.submit nil, :class => 'btn btn-primary' %>
-                  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                            root_path, :class => 'btn btn-default' %>
-    
+  <div class="control-group">
+    <%= f.label :q2, 'What are you going to work on today?', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :q2, :class => 'form-control' %>
+    </div>
+  </div>
+  <br />
 
-      <% end %>
+  <div class="control-group">
+    <%= f.label :q3, 'What are you blocked on?', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :q3, :class => 'form-control' %>
+    </div>
+  </div>
+  <br />
+
+  <br />
+    <%= f.hidden_field :user_id, value: @user.id, :class => 'form-control' %>
+
+    <%= f.hidden_field :project_id, value: @project.id, :class => 'form-control' %>
+  
+  
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+  
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                root_path, :class => 'btn btn-default' %>
+<% end %>
+
+    <!-- end -->
   </body>
 </html>

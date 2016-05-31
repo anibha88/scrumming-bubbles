@@ -45,12 +45,14 @@ class ListingsController < ApplicationController
   end
 
   def send_email
-    # binding.pry
+    #binding.pry
+    @listing = Listing.new
+    @user = current_user
     
     @tenant = Tenant.find(params[:tenant_id])
     @project = Project.find(params[:project_id])
     
-    UserNotifier.status_email(@tenant, @project).deliver
+    UserNotifier.status_email(@tenant, @project, @user).deliver
     redirect_to :back, notice: 'Mail was successfully sent.'
   end
 
