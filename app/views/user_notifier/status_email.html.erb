@@ -10,7 +10,7 @@
     </p>
     <%#= render :partial => 'listings/form', locals: {user_id: @user.id, project_id: @project.id} %>
 <!--     start -->
-      <%= form_for(@listing) do |f| %>
+      <%= form_for @listing, url: new_listing_path, :html => { :class => "form-horizontal project" } do |f| %>
   <% if @listing.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
       <div class="panel-heading">
