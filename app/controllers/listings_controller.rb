@@ -33,9 +33,7 @@ class ListingsController < ApplicationController
     @user = User.last
     respond_to do |format|
       if @listing.save
-        # binding.pry
-        #UserNotifier.sample_email(@user, @listing).deliver
-        UserNotifier.status_email(@tenant, @project).deliver
+        #UserNotifier.status_email(@tenant, @project).deliver
 
         format.html { redirect_to @listing, notice: 'Listing was successfully created.' }
         format.json { render :show, status: :created, location: @listing }
@@ -44,6 +42,16 @@ class ListingsController < ApplicationController
         format.json { render json: @listing.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def send_email
+    # binding.pry
+    
+    @tenant = Tenant.find(params[:tenant_id])
+    @project = Project.find(params[:project_id])
+    
+    UserNotifier.status_email(@tenant, @project).deliver
+    redirect_to :back, notice: 'Mail was successfully sent.'
   end
 
   # PATCH/PUT /listings/1
