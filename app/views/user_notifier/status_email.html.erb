@@ -9,6 +9,60 @@
       Sample status mail sent using smtp.
     </p>
     Click <%= link_to 'here', new_listing_url(tenant_id: @project.tenant_id, project_id: @project.id) %> to fill in your daily status.
+    <!-- start -->
+      <%= form_for(@listing) do |f| %>
+              <% if @listing.errors.any? %>
+                <div id="error_expl" class="panel panel-danger">
+                  <div class="panel-heading">
+                    <h3 class="panel-title"><%= pluralize(@listing.errors.count, "error") %> prohibited this listing from being saved:</h3>
+                  </div>
+                  <div class="panel-body">
+                    <ul>
+                    <% @listing.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                    <% end %>
+                    </ul>
+                  </div>
+                </div>
+              <% end %>
+
+              <div class="control-group">
+                <%= f.label :q1, 'What did you work on yesterday?', :class => 'control-label' %>
+                <div class="controls">
+                  <%= f.text_area :q1, :class => 'form-control' %>
+                </div>
+              </div>
+              <br />
+
+              <div class="control-group">
+                <%= f.label :q2, 'What are you going to work on today?', :class => 'control-label' %>
+                <div class="controls">
+                  <%= f.text_area :q2, :class => 'form-control' %>
+                </div>
+              </div>
+              <br />
+
+              <div class="control-group">
+                <%= f.label :q3, 'What are you blocked on?', :class => 'control-label' %>
+                <div class="controls">
+                  <%= f.text_area :q3, :class => 'form-control' %>
+                </div>
+              </div>
+              <br />
+
+              <br />
+                <%= f.hidden_field :user_id, value: @user.id, :class => 'form-control' %>
+
+                <%= f.hidden_field :project_id, value: @project.id, :class => 'form-control' %>
+              
+              
+                <%= f.submit nil, :class => 'btn btn-primary' %>
+              
+              <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                            root_path, :class => 'btn btn-default' %>
+      <% end %>
+
+    <!-- end -->
 
   </body>
 </html>
